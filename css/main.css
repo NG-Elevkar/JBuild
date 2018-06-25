@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 body {
     font-weight: 100;
     padding: 0;
@@ -18,8 +21,11 @@ body {
     float: left;
 }
 .component-panel .component .icon {
-    width: 32px;
+    width: 64px;
     margin: auto;
+}
+.component-panel .icon img {
+    width: 64px;
 }
 .component-panel .component .name {
     width: 100%;
@@ -35,7 +41,17 @@ body {
     height: 100vh;
     float: left;
 }
-
+.work-area .component {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+}
+.work-area .icon {
+    height: 32px;
+}
+.work-area .icon img {
+    height: 32px;
+}
 .property-editor {
     width: 300px;
     float: right;

@@ -1,7 +1,7 @@
 var components = [
     {
 	"name": "Paragraph",
-	"icon": "./img/components/paragraph-icon.png",
+	"icon": "./img/components/paragraph.png",
 	"properties": [
 	    {
 		"type": "textarea",
@@ -36,7 +36,7 @@ function parseComponent(component) {
 	ondragstart: "dragStart(event);"
     }).attr("data-id", component["name"].toLowerCase());
     var name = $("<div/>", {class: "name"}).text(component["name"]);
-    var icon = $("<div/>", {class: "icon"}).append($("<img/>", {src: component["icon"]}));
+    var icon = $("<div/>", {class: "icon"}).append($("<img/>", {src: component["icon"], draggable: false}));
     compContainer.append(icon).append(name);
     $(".component-list").append(compContainer);
 }
@@ -50,7 +50,8 @@ function parseComponentProperties(properties) {
 function dragStart(event) {
     event.dataTransfer.setData("id", event.target.dataset.id);
     var img = new Image();
-    img.src = "./img/compontents/" + event.target.dataset.id + "-icon.png"; 
+    img.src = "/img/components/" + event.target.dataset.id + ".png"; 
+    console.log(img.src);
     event.dataTransfer.setDragImage(img, 10, 10);
 }
 function dragOver(event) {
