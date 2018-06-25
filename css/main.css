@@ -31,7 +31,9 @@ body {
     text-align: center;
 }
 .work-area {
-
+    width: calc(100% - 700px);
+    height: 100vh;
+    float: left;
 }
 
 .property-editor {

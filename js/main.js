@@ -48,10 +48,18 @@ function parseComponentProperties(properties) {
 
 // Begin drag and drop handler
 function dragStart(event) {
-    event.dataTransfer.setData("text/plain", event.target.dataset.id);
+    event.dataTransfer.setData("id", event.target.dataset.id);
     var img = new Image();
     img.src = "./img/compontents/" + event.target.dataset.id + "-icon.png"; 
-    ev.dataTransfer.setDragImage(img, 10, 10);
+    event.dataTransfer.setDragImage(img, 10, 10);
+}
+function dragOver(event) {
+    event.preventDefault();
+}
+function drop(event) {
+    event.preventDefault();
+    var type = event.dataTransfer.getData("id");
+    console.log(type);
 }
 // End drag and drop handler
 $(document).ready(function() {
