@@ -7,45 +7,50 @@ var components = {
 	    {
 		"type": "textarea",
 		"name": "content",
-		"value": {}
+		"value": {"text": "type some content in here"}
 	    },
 	    {
 		"type": "textline",
 		"name": "font",
-		"value": {}
+		"value": {"text": "Roboto"}
 	    },
 	    {
 		"type": "int",
 		"name": "fontsize",
-		"value": {}
+		"default": 12,
+		"min": 0,
+		"max": 72
 	    }
 	]
     }
 };
 var properties = {
     "textarea": {
-	"generate": function(name, index) {
-	    var input = $("<textarea/>", {class: name});
+	"generate": function(object, index) {
+	    var input = $("<textarea/>", {class: object["name"]});
 	    return $("<div/>", {
 		class: "section"
-	    }).append(generateTitle(name)).append(input).data("index", index);
+	    }).append(generateTitle(object["name"])).append(input).data("index", index);
 	},
 	"retrieve": function(name, index) {
 
 	}
     },
     "textline": {
-	"generate": function(name, index) {
-	    var input = $("<input/>", {class: name, type: "text"});
-	    return $("<div/>", {class: "section"}).append(generateTitle(name)).append(input);
+	"generate": function(object, index) {
+	    var input = $("<input/>", {class: object["name"], type: "text"});
+	    return $("<div/>", {class: "section"}).append(generateTitle(object["name"])).append(input);
 	},
 	"retrieve": function(name, index) {
 	}
     },
     "int": {
-	"generate": function(name, index) {
-	    var input = $("<input/>", {class: name, type: "number"});
-	    return $("<div/>", {class: "section"}).append(generateTitle(name)).append(input);
+	"generate": function(object, index) {
+	    var input = $("<input/>", {class: object["name"], type: "number", min: object["min"], max: object["max"]});
+	    return $("<div/>", {class: "section"}).append(generateTitle(object["name"])).append(input);
+	},
+	"retrieve": function(name, index) {
+
 	}
     }
 };
@@ -143,7 +148,7 @@ function loadProperties(component, index) {
     clearProperties();
     for(property in component["properties"]) {
 	var tmp = component["properties"][property];
-	$(".property-editor").append(properties[tmp["type"]]["generate"](tmp["name"], index));
+	$(".property-editor").append(properties[tmp["type"]]["generate"](tmp, index));
     }
 }
 $(document).ready(function() {
