@@ -87,11 +87,17 @@ body {
     height: 100vh;
     box-shadow: 0 0 8px 0px #000;
 }
-.property-editor .section-list .section .header {
+.property-editor .section .header {
     font-size: 16pt;
 }
-.property-editor .section-list .section textarea {
+.property-editor .section textarea {
     width: 100%;
     height: 400px;
     resize: none;
+}
+.property-editor .section input {
+    width: 100%;
+}
+.property-editor .section input[type="number"] {
+    width: 60px;
 }

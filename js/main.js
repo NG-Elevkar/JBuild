@@ -25,19 +25,33 @@ var components = {
 var properties = {
     "textarea": {
 	"generate": function(name, index) {
-	    var title = $("<div/>", {
-	    class: "header"
-	    }).text(capitalize(name));
-	    var input = $("<textarea/>", {class: "content"});
+	    var input = $("<textarea/>", {class: name});
 	    return $("<div/>", {
 		class: "section"
-	    }).append(title).append(input).data("index", index);
+	    }).append(generateTitle(name)).append(input).data("index", index);
 	},
 	"retrieve": function(name, index) {
 
 	}
+    },
+    "textline": {
+	"generate": function(name, index) {
+	    var input = $("<input/>", {class: name, type: "text"});
+	    return $("<div/>", {class: "section"}).append(generateTitle(name)).append(input);
+	},
+	"retrieve": function(name, index) {
+	}
+    },
+    "int": {
+	"generate": function(name, index) {
+	    var input = $("<input/>", {class: name, type: "number"});
+	    return $("<div/>", {class: "section"}).append(generateTitle(name)).append(input);
+	}
     }
 };
+function generateTitle(name) {
+    return $("<div/>", {class: "header"}).text(capitalize(name));
+}
 function capitalize(string) {
     return string[0].toUpperCase() + string.substring(1)
 }
