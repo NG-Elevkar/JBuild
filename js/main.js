@@ -27,17 +27,20 @@ var properties = {
 	"generate": function(name, index) {
 	    var title = $("<div/>", {
 	    class: "header"
-	    }).text(name);
+	    }).text(capitalize(name));
 	    var input = $("<textarea/>", {class: "content"});
 	    return $("<div/>", {
 		class: "section"
-	    }).append(title).append(input);
+	    }).append(title).append(input).data("index", index);
 	},
 	"retrieve": function(name, index) {
 
 	}
     }
 };
+function capitalize(string) {
+    return string[0].toUpperCase() + string.substring(1)
+}
 function parseComponent(component) {
     var compContainer = $("<div/>", {
 	class: "component",
@@ -114,7 +117,7 @@ function selectComponent(jObject) {
     jObject.addClass("selected");
     saveProperties();
     clearProperties();
-    loadProperties(site["components"][jObject.data()["index"]]);
+    loadProperties(site["components"][jObject.data("index")], jObject.data("index"));
 }
 function saveProperties() {
     
