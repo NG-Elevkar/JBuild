@@ -50,6 +50,18 @@ body {
 .work-area .component {
     overflow: auto;
     border-bottom: 1px solid #000;
+    padding: 4px;
+    margin: 0;
+}
+.work-area .component .righty .icon:hover, .work-area .component .label {
+    cursor: pointer;
+}
+.work-area .component .label:hover {
+    text-decoration: underline;
+}
+.work-area .selected {
+    padding: 0px;
+    border: 4px #333 solid;
 }
 .label {
     margin: 10px;
@@ -64,12 +76,10 @@ body {
     float: left;
     font-size: 32px;
     margin: 10px;
+    color: #333;
 }
 .work-area .icon img {
     height: 32px;
-}
-.work-area .properties {
-    
 }
 .property-editor {
     width: 300px;
