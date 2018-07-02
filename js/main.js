@@ -1,4 +1,4 @@
-var site = {"components": []};
+var site = {"components": {}};
 var components = {
     "paragraph": {
 	"name": "Paragraph",
@@ -7,17 +7,17 @@ var components = {
 	    {
 		"type": "textarea",
 		"name": "content",
-		"value": {"text": "type some content in here"}
+		"value": "Type some content in here"
 	    },
 	    {
 		"type": "textline",
 		"name": "font",
-		"value": {"text": "Roboto"}
+		"value": "Roboto"
 	    },
 	    {
 		"type": "int",
 		"name": "fontsize",
-		"default": 12,
+		"value": 12,
 		"min": 0,
 		"max": 72
 	    }
@@ -38,7 +38,7 @@ var properties = {
     },
     "textline": {
 	"generate": function(object, index) {
-	    var input = $("<input/>", {class: object["name"], type: "text"});
+	    var input = $("<input/>", {class: object["name"], type: "text"}).val(object["value"]);
 	    return $("<div/>", {class: "section"}).append(generateTitle(object["name"])).append(input);
 	},
 	"retrieve": function(name, index) {
@@ -46,11 +46,11 @@ var properties = {
     },
     "int": {
 	"generate": function(object, index) {
-	    var input = $("<input/>", {class: object["name"], type: "number", min: object["min"], max: object["max"]});
+	    var input = $("<input/>", {class: object["name"], type: "number", min: object["min"], max: object["max"]}).val(object["value"]);
 	    return $("<div/>", {class: "section"}).append(generateTitle(object["name"])).append(input);
 	},
 	"retrieve": function(name, index) {
-
+	    
 	}
     }
 };
@@ -88,10 +88,19 @@ function drop(event) {
     var type = event.dataTransfer.getData("id");
     handleDrop(type);
 }
+function genId() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
 function handleDrop(type) { // Called everytime a component is dropped on the work-area
-    site["components"].push(components[type]); // Add an instance of the component to the site object
+    var index = genId();
+    site["components"][index] = components[type]; // Add an instance of the component to the site object
     var root = $(".work-area"); // The root element for the work-area
-    var newComponent = $("<div/>", {class: "component", onclick: "selectComponent($(this));"}).data("index", site["components"].length - 1); // The new component element that will be added to the work-area. will also have the position in site["components"] stored in dom
+    var newComponent = $("<div/>", {class: "component", onclick: "selectComponent($(this));"}).data("index", index); // The new component element that will be added to the work-area. will also have the position in site["components"] stored in dom
     var content = []; // An array with all the elements that will be added to the new component
     content.push( // Component Icon Container
 	$("<div/>",
